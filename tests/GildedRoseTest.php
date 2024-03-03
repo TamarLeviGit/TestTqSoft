@@ -35,15 +35,24 @@ class GildedRoseTest extends TestCase
         $this->assertEquals($items[0]->quality, 0); 
         $this->assertEquals($items[0]->sellIn, 5); 
     } 
-     //"Aged Brie" tests actually increase by 1 in quality as it ages before its sellIn has passed
-     public function testAgedBrieQuality(): void
-     {
-        $items = [new Item('Aged Brie', 6, 30)];
+    //"Aged Brie" tests actually increase by 1 in quality as it ages before its sellIn has passed
+    public function testAgedBrieQuality(): void
+    {
+       $items = [new Item('Aged Brie', 6, 30)];
+       $gildedRose = new GildedRose($items);
+       $gildedRose->updateQuality();
+       $this->assertEquals($items[0]->quality, 31); 
+       $this->assertEquals($items[0]->sellIn, 5);
+    }
+    //"Aged Brie" tests actually increase by 2 in quality as it ages after its sellIn has passed
+    public function testAgedBrieQualityAfterSellInPassed(): void
+    {
+        $items = [new Item('Aged Brie', -2, 30)];
         $gildedRose = new GildedRose($items);
         $gildedRose->updateQuality();
-        $this->assertEquals($items[0]->quality, 31); 
-        $this->assertEquals($items[0]->sellIn, 5);
-     } 
+        $this->assertEquals($items[0]->quality, 32);
+        $this->assertEquals($items[0]->sellIn, -3); 
+    }  
     //Checks 'Aged Brie' and 'Backstage passes to a TAFKAL80ETC concert' items that the quality value has not been updated more than 50 except for 'Sulfuras, Hand of Ragnaros'
     public function testAgedBrieQualityNotMore_50(): void
     {
@@ -55,14 +64,7 @@ class GildedRoseTest extends TestCase
         $this->assertEquals($items[1]->quality, 50); 
     } 
    
-    //"Aged Brie" tests actually increase by 2 in quality as it ages after its sellIn has passed
-    public function testAgedBrieQualityAfterSellInPassed(): void
-    {
-        $items = [new Item('Aged Brie', -2, 30)];
-        $gildedRose = new GildedRose($items);
-        $gildedRose->updateQuality();
-        $this->assertEquals($items[0]->quality, 32); 
-    } 
+   
     //'Backstage passes to a TAFKAL80ETC concert' tests actually increase by 1 in quality which sellIn greater than 10
     public function testBackstageQualityWhenSellInGreater10(): void
     {
