@@ -144,4 +144,22 @@ class GildedRoseTest extends TestCase
         $this->assertEquals($items[0]->quality, 80);
         $this->assertEquals($items[0]->sellIn, 10);
     }
+    //checks 'Conjured Mana Cake' before sellIn has passed
+    public function testConjuredBeforeSellInPassed(): void
+    {
+        $items = [new Item('Conjured Mana Cake', 10, 20)];
+        $gildedRose = new GildedRose($items);
+        $gildedRose->updateQuality();
+        $this->assertEquals($items[0]->quality, 18);
+        $this->assertEquals($items[0]->sellIn, 9);
+    }
+    //checks 'Conjured Mana Cake' after sellIn has passed
+    public function testConjuredSellInPassed(): void
+    {
+        $items = [new Item('Conjured Mana Cake', 0, 20)];
+        $gildedRose = new GildedRose($items);
+        $gildedRose->updateQuality();
+        $this->assertEquals($items[0]->quality, 16);
+        $this->assertEquals($items[0]->sellIn, -1);
+    }
 }
