@@ -101,11 +101,11 @@ class GildedRoseTest extends TestCase
     //'Backstage passes to a TAFKAL80ETC concert' tests Quality drops to 0 when the concert
     public function testBackstageQualityWhenTheConcert(): void
     {
-        $items = [new Item('Backstage passes to a TAFKAL80ETC concert', -1, 10)];
+        $items = [new Item('Backstage passes to a TAFKAL80ETC concert', 0, 10)];
         $gildedRose = new GildedRose($items);
         $gildedRose->updateQuality();
         $this->assertEquals($items[0]->quality, 0); 
-        $this->assertEquals($items[0]->sellIn, -2);
+        $this->assertEquals($items[0]->sellIn, -1);
     }
     //'Backstage passes to a TAFKAL80ETC concert' tests Quality not increase after the concert
     public function testBackstageQualityAfterTheConcert(): void
