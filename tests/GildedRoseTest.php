@@ -26,6 +26,15 @@ class GildedRoseTest extends TestCase
         $this->assertEquals($items[0]->quality, 4); 
         $this->assertEquals($items[0]->sellIn, 2); 
     } 
+    //Checks Once the sell by date has passed, Quality degrades twice as fast
+    public function testQualityAllItemsAfterSellInPassed(): void
+    {
+        $items = [new Item('Elixir of the Mongoose', -2, 20)];
+        $gildedRose = new GildedRose($items);
+        $gildedRose->updateQuality();
+        $this->assertEquals($items[0]->quality, 18);
+        $this->assertEquals($items[0]->sellIn, -3); 
+    } 
     //Checks that the value has not been updated to negative
     public function testQualityOfAllItemsNotNegative(): void
     {
@@ -52,7 +61,11 @@ class GildedRoseTest extends TestCase
         $gildedRose->updateQuality();
         $this->assertEquals($items[0]->quality, 32);
         $this->assertEquals($items[0]->sellIn, -3); 
-    }  
+    } 
+    
+    
+
+
     //Checks 'Aged Brie' and 'Backstage passes to a TAFKAL80ETC concert' items that the quality value has not been updated more than 50 except for 'Sulfuras, Hand of Ragnaros'
     public function testAgedBrieQualityNotMore_50(): void
     {
@@ -96,15 +109,7 @@ class GildedRoseTest extends TestCase
         $gildedRose = new GildedRose($items);
         $gildedRose->updateQuality();
         $this->assertEquals($items[0]->quality, 0); 
-    } 
-    //Checks Once the sell by date has passed, Quality degrades twice as fast
-    public function testQualityOfAllItemsAfterSellInPassed(): void
-    {
-        $items = [new Item('simpleItems', -1, 10)];
-        $gildedRose = new GildedRose($items);
-        $gildedRose->updateQuality();
-        $this->assertEquals($items[0]->quality, 8); 
-    } 
+    }   
     //Checks 'Sulfuras, Hand of Ragnaros' Quality equals 80
     public function testSulfurasQuality(): void
     {
