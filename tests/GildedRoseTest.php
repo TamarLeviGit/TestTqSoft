@@ -29,10 +29,11 @@ class GildedRoseTest extends TestCase
     //Checks that the value has not been updated to negative
     public function testQualityOfAllItemsNotNegative(): void
     {
-        $items = [new Item('QualityNotNegative', 0, 0)];
+        $items = [new Item('Elixir of the Mongoose', 6, 0)];
         $gildedRose = new GildedRose($items);
         $gildedRose->updateQuality();
         $this->assertEquals($items[0]->quality, 0); 
+        $this->assertEquals($items[0]->sellIn, 5); 
     } 
     //Checks 'Aged Brie' and 'Backstage passes to a TAFKAL80ETC concert' items that the quality value has not been updated more than 50 except for 'Sulfuras, Hand of Ragnaros'
     public function testAgedBrieQualityNotMore_50(): void
