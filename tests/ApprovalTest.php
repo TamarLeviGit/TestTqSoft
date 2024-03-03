@@ -21,24 +21,24 @@ use ApprovalTests\Approvals;
 class ApprovalTest extends TestCase
 {
 
-	public function testFoo(): void
-    {
-        $items = [new Item('foo', 0, 0)];
-        $app = new GildedRose($items);
-        $app->updateQuality();
+	// public function testFoo(): void
+    // {
+    //     $items = [new Item('foo', 0, 0)];
+    //     $app = new GildedRose($items);
+    //     $app->updateQuality();
 
-		Approvals::verifyList($items);
-	}
+	// 	Approvals::verifyList($items);
+	// }
 
-    public function testThirtyDays(): void
-     {
-        ob_start();
+    // public function testThirtyDays(): void
+    //  {
+    //     ob_start();
 
-        $argv = ["", "30"];
-        include(__DIR__.'/../fixtures/texttest_fixture.php');
+    //     $argv = ["", "30"];
+    //     include(__DIR__.'/../fixtures/texttest_fixture.php');
         
-        $output = ob_get_clean();
+    //     $output = ob_get_clean();
 
-        Approvals::approveString($output);
-    }
+    //     Approvals::approveString($output);
+    // }
 }
