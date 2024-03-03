@@ -71,15 +71,14 @@ class GildedRoseTest extends TestCase
         $this->assertEquals($items[0]->quality, 50); 
         $this->assertEquals($items[0]->sellIn, 9); 
     } 
-   
-   
     //'Backstage passes to a TAFKAL80ETC concert' tests actually increase by 1 in quality which sellIn greater than 10
-    public function testBackstageQualityWhenSellInGreater10(): void
+    public function testBackstageQuality(): void
     {
         $items = [new Item('Backstage passes to a TAFKAL80ETC concert', 12, 30)];
         $gildedRose = new GildedRose($items);
         $gildedRose->updateQuality();
         $this->assertEquals($items[0]->quality, 31); 
+        $this->assertEquals($items[0]->sellIn, 11); 
     } 
     //'Backstage passes to a TAFKAL80ETC concert' tests actually increase by 2 in quality which sellIn smaller than 11
     public function testBackstageQualityWhenSellInSmaller11(): void
