@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace GildedRose;
 
-class UpdateAgedBrie implements IUpdateItems
+class UpdateAgedBrieItem implements IUpdateItems
 {
     public function updateQuality(Item $item): void{
         if ($item->sellIn < 0) {

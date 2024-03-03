@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace GildedRose;
 
-class UpdateBackstagePasses implements IUpdateItems
+class UpdateBackstagePassesItem implements IUpdateItems
 {
     public function updateQuality(Item $item): void{
         if($item->sellIn < 0) {
