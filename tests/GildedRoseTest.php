@@ -62,19 +62,14 @@ class GildedRoseTest extends TestCase
         $this->assertEquals($items[0]->quality, 32);
         $this->assertEquals($items[0]->sellIn, -3); 
     } 
-    
-    
-
-
-    //Checks 'Aged Brie' and 'Backstage passes to a TAFKAL80ETC concert' items that the quality value has not been updated more than 50 except for 'Sulfuras, Hand of Ragnaros'
-    public function testAgedBrieQualityNotMore_50(): void
+    //Checks 'Aged Brie' that the quality value has not been updated more than 50
+    public function testAgedBrieQualityNotMore50(): void
     {
-        $items1 = [new Item('Aged Brie', 10, 50)];
-        $items2 = [new Item('Backstage passes to a TAFKAL80ETC concert', 5, 48)];
-        $gildedRose = new GildedRose($items1, $items2);
+        $items = [new Item('Aged Brie', 10, 50)];
+        $gildedRose = new GildedRose($items);
         $gildedRose->updateQuality();
         $this->assertEquals($items[0]->quality, 50); 
-        $this->assertEquals($items[1]->quality, 50); 
+        $this->assertEquals($items[0]->sellIn, 9); 
     } 
    
    
