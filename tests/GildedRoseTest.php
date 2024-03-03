@@ -132,6 +132,7 @@ class GildedRoseTest extends TestCase
         $items = [new Item('Sulfuras, Hand of Ragnaros', 10, 80)];
         $gildedRose = new GildedRose($items);
         $gildedRose->updateQuality();
+        $this->assertEquals($items[0]->quality, 80);
         $this->assertEquals($items[0]->sellIn, 10);
     }
 
