@@ -4,6 +4,12 @@ declare(strict_types=1);
 
 namespace GildedRose;
 
+// require_once 'Item.php';
+require_once 'UpdateAgedBrieItem.php';
+require_once 'UpdateBackstagePassesItem.php';
+require_once 'UpdateConjuredItem.php';
+require_once 'UpdateDefaultItem.php';
+
 final class GildedRose
 {
     /**
@@ -17,53 +23,25 @@ final class GildedRose
     public function updateQuality(): void
     {
         foreach ($this->items as $item) {
-            if ($item->name != 'Sulfuras, Hand of Ragnaros') { 
-                $item->sellIn = $item->sellIn - 1;  
-                if($item->name == 'Aged Brie'){
-                    if ($item->sellIn < 0) {
-                        $item->quality = $item->quality + 1;
-                    }
-                    $item->quality = $item->quality + 1;
-                    if ($item->quality > 50) {
-                        $item->quality = 50;
-                    }
-                }
-                else if ($item->name == 'Backstage passes to a TAFKAL80ETC concert'){
-                    if($item->sellIn < 0) {
-                        $item->quality = 0;
-                    }
-                    else{
-                        $item->quality = $item->quality + 1;
-                        if ($item->sellIn < 5) {
-                            $item->quality = $item->quality + 2;
-                        }
-                        else if ($item->sellIn < 10) {
-                            $item->quality = $item->quality + 1;
-                        }
-                        if ($item->quality > 50) {
-                            $item->quality = 50;
-                        }
-                    }
-                }
-                else if($item->name == 'Conjured Mana Cake'){
-                    if($item->sellIn < 0) {
-                        $item->quality = $item->quality - 2;
-                    } 
-                    $item->quality = $item->quality - 2;
-                    if($item->quality < 0){
-                        $item->quality = 0;
-                    }
-                }
-                else{
-                    if($item->sellIn < 0) {
-                        $item->quality = $item->quality - 1;
-                    } 
-                    $item->quality = $item->quality - 1;
-                    if($item->quality < 0){
-                        $item->quality = 0;
-                    }
-                } 
-            }
+            $this->updateItemsQuality($item);   
+        }
+    }
+    private function updateItemsQuality(Item $item): void
+    {
+        switch ($item->name) {
+            case 'Aged Brie':
+                UpdateAgedBrieItem::updateQuality($item);
+                break;
+            case 'Backstage passes to a TAFKAL80ETC concert':
+                UpdateBackstagePassesItem::updateQuality($item);
+                break;
+            case 'Conjured Mana Cake':
+                UpdateConjuredItem::updateQuality($item);
+                break;
+            case 'Sulfuras, Hand of Ragnaros':
+                break;
+            default:
+            UpdateDefaultItem::updateQuality($item);
         }
     }
 }

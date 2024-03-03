@@ -6,5 +6,5 @@ namespace GildedRose;
 
 interface IUpdateItems
 {
-    public function updateQuality(Item $item): void;
+    public static function updateQuality(Item $item): void;
 }
