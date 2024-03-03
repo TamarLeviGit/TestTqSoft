@@ -10,13 +10,22 @@ use PHPUnit\Framework\TestCase;
 
 class GildedRoseTest extends TestCase
 {
-    public function testFoo(): void
+    // public function testFoo(): void
+    // {
+    //     $items = [new Item('foo', 0, 0)];
+    //     $gildedRose = new GildedRose($items);
+    //     $gildedRose->updateQuality();
+    //     $this->assertSame('fixme', $items[0]->name);
+    // }
+    //Checks quality all simple items 
+    public function testQualityOfAllItems(): void
     {
-        $items = [new Item('foo', 0, 0)];
+        $items = [new Item('+5 Dexterity Vest', 3, 5)];
         $gildedRose = new GildedRose($items);
         $gildedRose->updateQuality();
-        $this->assertSame('fixme', $items[0]->name);
-    }
+        $this->assertEquals($items[0]->quality, 4); 
+        $this->assertEquals($items[0]->sellIn, 2); 
+    } 
     //Checks that the value has not been updated to negative
     public function testQualityOfAllItemsNotNegative(): void
     {
